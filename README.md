@@ -5,6 +5,8 @@
 This is a personal project—a fun and accessible Tarot card shuffler and draw web app!  
 It’s a work in progress and will be updated periodically as I experiment and learn.
 
+![ezgif-4238c483bac038](https://github.com/user-attachments/assets/c576bcbe-4d03-451b-b000-cfa35ad0b196)
+
 ## Features
 
 - Shuffle a full tarot deck and draw cards
