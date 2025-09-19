@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>WORK IN PROGRESS - TAROT PULL WEB APP</title>
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/tarot-style.css">
+    
+    <!-- <style>
+        
+    </style> -->
+    
+    <style>
+      /* Quick inline styling for tarot section */
+      #card { margin-top: 20px; font-size: 1.5em; }
+      #meaning { margin-top: 10px; font-style: italic; max-width: 500px; margin-left: auto; margin-right: auto; }
+      #image img { max-width: 200px; margin-top: 15px; }
+    </style>
+</head>
+ 
+<body>
+    
+      <a href="#primary-content" class="skip-link">Skip to main content</a>
+      
+   <header aria-label="Site header">
+      <div class="wrapper">
+          <h1>WORK IN PROGRESS <span class="color">.</span></h1>
+          <nav aria-label="Main navigation">
+              <ul> 
+                <!-- //PLACEHOLDER IMAGE -->
+                  <li><a href="#" aria-label="Home page">Home</a></li>
+                <li><a href="https://tinyurl.com/mvmed5p8" aria-label="Link to Notion Portfolio page">Portfolio</a></li>
+                <li><a href="#" aria-label="Contact section">Contact</a></li>
+              </ul>
+          </nav>
+      </div>
+    </header>
+    
+ <div id="hero-image" aria-label="Tarot hero image section">
+    <img src="https://i.postimg.cc/Fsd9Vdnj/temp-Image6azj5-P.avif" alt="Hero Image: tarot cards spread across a wooden table, surrounded by candles, crystals, and trinkets.">
+    <!-- <div class="wrapper">
+        <h2 aria-label="Hero section heading"></h2>
+      <a aria-label="Hero section link"></a>
+    </div> -->
+</div>
+    
+    <!-- <div id="features">
+        <div class="wrapper">
+            <ul>
+                <li>list</li>
+                <li>list</li>
+                <li>list</li>
+            </ul>
+        </div>
+    </div> -->
+    
+   <div id="primary-content" aria-label="Tarot card draw section">
+  <div class="wrapper">
+      <article>
+        <h2 id="tarot-draw-heading">Tarot Card Draw</h2>
+        <button id="shuffleBtn" aria-label="Shuffle the tarot deck">Shuffle Deck</button>
+        <button id="drawBtn" aria-label="Draw a tarot card">Draw Card</button>
+        <div id="card" aria-live="polite"></div>
+        <div id="meaning" aria-live="polite" ></div>
+        <div id="image" aria-label="Card image"></div>
+      </article>
+  </div>
+</div>
+    
+    <!-- <div id="secondary-content">
+        <div class="wrapper">
+             <img src="https://i.postimg.cc/PfFXDzKX/temp-Imagec-Xc-W9t.avif" alt="Decorative Image: ">
+             <article></article>
+            <article></article> -->
+        <!-- </div>
+    </div> --> 
+    
+    <!-- <div id="cta">
+        <div class="wrapper">
+        </div>
+    </div> -->
+    
+   <footer aria-label="Site footer">
+  <div class="wrapper">
+      <div id="footer-info" aria-label="Footer information"></div>
+      <div id="footer-links" aria-label="Footer links">
+          <ul><li>something - footer links</li></ul>
+          <ul><li>something</li></ul>
+          <ul><li>something</li></ul>
+      </div>
+  </div>
+</footer>
+
+    <div id="secondary-content">
+        <div class="wrapper">
+             <img src="https://i.postimg.cc/PfFXDzKX/temp-Imagec-Xc-W9t.avif" alt="Decorative Image: ">
+            <!-- <article></article>
+            <article></article> -->
+        </div>
+    </div>
+
+    <!-- Load the tarot deck (full 78 cards) -->
+    <script src="tarot-deck.js"></script>
+
+    <!-- App logic -->
+    <script>
+      let deck = [];
+      let currentIndex = 0;
+
+      function shuffleDeck() {
+        deck = [...fullDeck]; // fullDeck comes from tarot-deck.js
+        for (let i = deck.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [deck[i], deck[j]] = [deck[j], deck[i]];
+        }
+        currentIndex = 0;
+        document.getElementById("card").textContent = "Deck shuffled!";
+        document.getElementById("meaning").textContent = "";
+        document.getElementById("image").innerHTML = "";
+      }
+
+      function drawCard() {
+        if (currentIndex >= deck.length) {
+          document.getElementById("card").textContent = "No more cards. Shuffle to reset!";
+          document.getElementById("meaning").textContent = "";
+          document.getElementById("image").innerHTML = "";
+          return;
+        }
+
+        const card = deck[currentIndex];
+        document.getElementById("card").textContent = card.name;
+        document.getElementById("meaning").textContent = card.meaning || "";
+        if (card.img) {
+          document.getElementById("image").innerHTML = `<img src="${card.img}" alt="${card.name}">`;
+        } else {
+          document.getElementById("image").innerHTML = "";
+        }
+        currentIndex++;
+      }
+
+      document.getElementById("shuffleBtn").addEventListener("click", shuffleDeck);
+      document.getElementById("drawBtn").addEventListener("click", drawCard);
+
+      document.getElementById("shuffleBtn").addEventListener("click", function() {
+  this.classList.add("clicked");
+  document.getElementById("drawBtn").classList.remove("clicked");
+});
+
+document.getElementById("drawBtn").addEventListener("click", function() {
+  this.classList.add("clicked");
+  document.getElementById("shuffleBtn").classList.remove("clicked");
+});
+    </script>
+</body>
+</html>
